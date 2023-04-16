@@ -7,9 +7,10 @@ function out = gaussfun(x,d,bandWidth)
 %
 % Copyright 2015 Han Gong, University of East Anglia
 
-    persistent ns = 1000; % resolution of guassian approximation
-    persistent xs = linspace(0,bandWidth,ns+1); % approximate ticks
-    persistent kfun = exp(-(xs.^2)/(2*bandWidth^2));
+    persistent ns xs kfun; 
+    ns = 1000; % resolution of guassian approximation
+    xs = linspace(0,bandWidth,ns+1); % approximate ticks
+    kfun = exp(-(xs.^2)/(2*bandWidth^2));
     w = kfun(round(d/bandWidth*ns)+1);
     w = w/sum(w); % normalise
     out = sum( bsxfun(@times, x, w ), 2 );
